@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <JUCERPROJECT id="ea5mBD" name="Simple MB Comp" projectType="audioplug" useAppConfig="0"
-              addUsingNamespaceToJuceHeader="0" jucerFormatVersion="1" companyName="Yaboy Music Supply">
+              addUsingNamespaceToJuceHeader="0" jucerFormatVersion="1" companyName="Yaboy Music Supply"
+              compilerFlagSchemes="NewScheme" pluginFormats="buildAU,buildAUv3,buildStandalone,buildVST3">
   <MAINGROUP id="BdVYQW" name="Simple MB Comp">
     <GROUP id="{AF7C9764-F87C-EDA4-6953-01CE931C62D6}" name="Source">
       <FILE id="XhE4rj" name="PluginProcessor.cpp" compile="1" resource="0"
