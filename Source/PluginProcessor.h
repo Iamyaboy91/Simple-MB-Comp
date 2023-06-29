@@ -58,7 +58,7 @@ public:
     using APVTS = juce::AudioProcessorValueTreeState;
     static APVTS::ParameterLayout createParameterLayout();
     APVTS apvts {*this, nullptr, "Parameters", createParameterLayout()};
-private:
+private:  
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (SimpleMBCompAudioProcessor)
 };

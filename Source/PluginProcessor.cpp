@@ -177,6 +177,13 @@ void SimpleMBCompAudioProcessor::getStateInformation (juce::MemoryBlock& destDat
     // You should use this method to store your parameters in the memory block.
     // You could do that either as raw data, or use the XML or ValueTree classes
     // as intermediaries to make it easy to save and load complex data.
+    
+}
+
+void SimpleMBCompAudioProcessor::setStateInformation (const void* data, int sizeInBytes)
+{
+    // You should use this method to restore your parameters from this memory block,
+    // whose contents will have been created by the getStateInformation() call.
 }
 juce::AudioProcessorValueTreeState::ParameterLayout SimpleMBCompAudioProcessor::createParameterLayout(){
     APVTS::ParameterLayout layout;
@@ -188,13 +195,17 @@ juce::AudioProcessorValueTreeState::ParameterLayout SimpleMBCompAudioProcessor::
                                                 attackReleaseRange, 50));
     layout.add(make_unique<AudioParameterFloat>("Release", "Release",
                                                 attackReleaseRange, 250));
+    auto choices = vector<double>{ 1, 1.5, 2, 3, 4, 5, 6, 7, 8, 10, 15, 20, 50, 100 };
+    juce::StringArray sa;
+    for (auto choice : choices ){
+        sa.add( juce::String(choice, 1));
+    }
+    
+    layout.add(make_unique<AudioParameterChoice>("Ratio", "Ratio", sa, 3));
+    
     return layout;
 };
-void SimpleMBCompAudioProcessor::setStateInformation (const void* data, int sizeInBytes)
-{
-    // You should use this method to restore your parameters from this memory block,
-    // whose contents will have been created by the getStateInformation() call.
-}
+
 
 //==============================================================================
 // This creates new instances of the plugin..
