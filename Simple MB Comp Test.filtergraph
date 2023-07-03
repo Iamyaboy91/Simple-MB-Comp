@@ -61,14 +61,14 @@
       </OUTPUTS>
     </LAYOUT>
   </FILTER>
-  <FILTER uid="5" x="0.55875" y="0.5480769230769231" useARA="0" uiLastX_Normal="-1716"
-          uiLastY_Normal="362" uiopen_Normal="1">
+  <FILTER uid="5" x="0.55875" y="0.5480769230769231" useARA="0" uiLastX_Normal="-1466"
+          uiLastY_Normal="382" uiopen_Normal="0">
     <PLUGIN name="Simple MB Comp" format="VST3" category="Fx" manufacturer="Yaboy Music Supply"
             version="1.0.0" file="/Users/YABOY/Library/Audio/Plug-Ins/VST3/Simple MB Comp.vst3"
-            uniqueId="f295a722" isInstrument="0" fileTime="188fa838b8e" infoUpdateTime="18901077ffe"
+            uniqueId="f295a722" isInstrument="0" fileTime="188fa838b8e" infoUpdateTime="18918f4bf96"
             numInputs="2" numOutputs="2" isShell="0" hasARAExtension="0"
             uid="acf4f185"/>
-    <STATE>191.VMjLgXK....O+fWarAhckI2bo8la8HRLt.iHfTlai8FYo41Y8HRUTYTK3HxO9.BOVMEUy.Ea0cVZtMEcgQWY9vSRC8Vav8lak4Fc9XCLt3hKt3hKt3hKt3hYRUUSTEETIckVwTjQisVTTgkdEYjKAQjYPQSPWgUdMcjKAQjct3hdA4hKt3hKt3hKtnTUv.UQAslXuk0UXoWUFE0YQcEV77RRC8Vav8lak4Fc9vyKVMEUy.Ea0cVZtMEcgQWY9..</STATE>
+    <STATE>423.VMjLg3Y....O+fWarAhckI2bo8la8HRLt.iHfTlai8FYo41Y8HRUTYTK3HxO9.BOVMEUy.Ea0cVZtMEcgQWY9vSRC8Vav8lak4Fc9HyLy3BTEwlXmAiUYoWUrIVdA4hKAAkKTETRUAUSAAkKBolQY4BQtHTQDQzX5UTLXEWPlM1Y2Y0XqEDTtjDTt3hKt3hKt3BTR4RPtPUPIUETMEDTtHjZFkkKDYWPEgTUXo2ZwDlKXcEVxU0UY4BQPIDQt3hKt3hKt3BTBAkKtTETRUDUS4BQl4xaQYjKAoFTAIUUFE1ZEEiXqEjYic1cVM1ZAAkKIAkKt3hKt3hKtXWXtDjKTETRUAUSAAkKBolQY4BQ1ITQPUjV3UULh4FNFElZAY1XmcmUisVPP4RRP4hKt3hKt3hKtnjKA4hKt3hKt3hKt3hKtQUUCUEQTg2ZrM1YQcUVDUjQicVPP4RPHQEY1UTLhkWPP4RPL4hKi4hKt3hKt3hKtXlTU0DUQAURWoULEYzXqEEUXoWQFwyKIMzasA2atUlaz4COuX0TTMCTrU2Yo41TzEFck4C.</STATE>
     <LAYOUT>
       <INPUTS>
         <BUS index="0" layout="L R"/>
@@ -78,11 +78,11 @@
       </OUTPUTS>
     </LAYOUT>
   </FILTER>
-  <FILTER uid="6" x="0.5625" y="0.3057692307692308" useARA="0" uiLastX_Normal="-1618"
-          uiLastY_Normal="191" uiopen_Normal="1">
+  <FILTER uid="6" x="0.5625" y="0.3057692307692308" useARA="0" uiLastX_Normal="-1745"
+          uiLastY_Normal="309" uiopen_Normal="0">
     <PLUGIN name="AudioFilePlayer" format="VST3" category="Fx" manufacturer="Matkat Music LLC"
             version="1.0.0" file="/Users/YABOY/Library/Audio/Plug-Ins/VST3/AudioFilePlayer.vst3"
-            uniqueId="79fe81c" isInstrument="0" fileTime="188fbcb8cb6" infoUpdateTime="18901077ffe"
+            uniqueId="79fe81c" isInstrument="0" fileTime="188fbcb8cb6" infoUpdateTime="18918f4bf97"
             numInputs="2" numOutputs="2" isShell="0" hasARAExtension="0"
             uid="acfeaab3"/>
     <STATE>334.VMjLgTT....O+fWarAhckI2bo8la8HRLt.iHfTlai8FYo41Y8HRUTYTK3HxO9.BOVMEUy.Ea0cVZtMEcgQWY9vSRC8Vav8lak4Fc9DiM13BTIISX1UEaho2ZVkUdAAkKAwDUigWRWkEcQ0VTucmUY4BQlMUQ2HUU4UEahkGNRYUPIo2TYgiPQUWSVM1bUwVX50jLKczcwDlTqYTXxUjQHMmKnAkbUEiX4UkQYYlYRAUZEYjXqcmQgcVPRsjYXASXoUjQgkWP3MEc2YEYu4hPNYGRFI1bzf2Xmk0Qt3hKt3hKt3hKt3hKtnTUv.UQAslXuk0UXoWUFE0YQcEVtPDTtHzZGI1YMIiXtPDTtLjKPcjKt3hKt3hKt3haTU0PUQDU3sFaicVTWkEQEYzXmEDOujzPu0Fbu4VYtQmO77hUSQ0LPwVcmklaSQWXzUlO..</STATE>
