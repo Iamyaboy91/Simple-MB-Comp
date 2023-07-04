@@ -33,8 +33,7 @@ void SimpleMBCompAudioProcessorEditor::paint (juce::Graphics& g)
     g.drawFittedText ("Hello World!", getLocalBounds(), juce::Justification::centred, 1);
 }
 
-void SimpleMBCompAudioProcessorEditor::resized()
-{
+void SimpleMBCompAudioProcessorEditor::resized(){
     // This is generally where you'll want to lay out the positions of any
     // subcomponents in your editor..
 }
