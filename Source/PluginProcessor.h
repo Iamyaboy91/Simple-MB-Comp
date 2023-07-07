@@ -8,12 +8,12 @@
 
 #pragma once
 /*DSP Roadmap
- 1)figure out how to split the audio into 3 bands
- 2)create parameters to control where this split happens
+ 1)figure out how to split the audio into 3 bands DONE
+ 2)create parameters to control where this split happens DONE
  3)prove that splitting into 3 bands produces no audible
-    artifacts
+    artifacts DONE
  4)create audio parameters for the 3 compressor bands.
-    these need to live on each band incetance.
+    these need to live on each band incetance. DONE
  5)add 2 remaining compressors
  6)add ability to mute /solo/bypass indivisual compressors
  7)add input output gain to offset changes in output level
@@ -154,8 +154,11 @@ public:
     static APVTS::ParameterLayout createParameterLayout();
     APVTS apvts {*this, nullptr, "Parameters", createParameterLayout()};
 private:
-
-    CompressorBand compressor;
+    
+    array<CompressorBand,3> compressors;
+    CompressorBand& lowBandComp = compressors[0];
+    CompressorBand& midBandComp = compressors[1];
+    CompressorBand& highBandComp = compressors[2];
     
     using Filter = juce::dsp::LinkwitzRileyFilter<float>;
 //         fc0  fc1
