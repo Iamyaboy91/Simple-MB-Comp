@@ -109,11 +109,10 @@ private:
 //==============================================================================
 /**
 */
-class SimpleMBCompAudioProcessor  : public juce::AudioProcessor
+class SimpleMBCompAudioProcessor  : public juce::AudioProcessor {
                             #if JucePlugin_Enable_ARA
-                             , public juce::AudioProcessorARAExtension
+                              public juce::AudioProcessorARAExtension
                             #endif
-{
 public:
     //==============================================================================
     SimpleMBCompAudioProcessor();
@@ -159,15 +158,17 @@ private:
     CompressorBand compressor;
     
     using Filter = juce::dsp::LinkwitzRileyFilter<float>;
-    Filter LP, HP;
-    Filter AP;
+//         fc0  fc1
+    Filter LP1, AP2,
+           HP1, LP2,
+                HP2;
+//    Filter invAP1, invAP2;
+//    juce::AudioBuffer<float> invAPBuffer;
     
-    juce::AudioBuffer<float> apBuffer;
-    
-    juce::AudioParameterFloat* lowCrossover { nullptr };
-    
-    array<juce::AudioBuffer<float>, 2> filterBuffers;
+    juce::AudioParameterFloat* lowMidCrossover { nullptr };
+    juce::AudioParameterFloat* midHighCrossover { nullptr };
+    array<juce::AudioBuffer<float>, 3> filterBuffers;
     
     //==============================================================================
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (SimpleMBCompAudioProcessor)
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (SimpleMBCompAudioProcessor);
 };
