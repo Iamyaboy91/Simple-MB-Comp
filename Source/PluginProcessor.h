@@ -16,7 +16,7 @@
     these need to live on each band incetance. DONE
  5)add 2 remaining compressors DONE
  6)add ability to mute /solo/bypass indivisual compressors DONE
- 7)add input output gain to offset changes in output level
+ 7)add input output gain to offset changes in output level DONE
  8)clean up anything that needs cleaning up
  
  */
@@ -54,12 +54,15 @@ enum Names{
     Solo_Low_Band,
     Solo_Mid_Band,
     Solo_High_Band,
+    
+    Gain_In,
+    Gain_Out,
 };
 inline const map<Names, juce::String>& GetParams(){
     static map<Names, juce::String> params = {
         {Low_Mid_Crossover_Freq,"Low Mid Crossover Freq"},
         {Mid_High_Crossover_Freq,"Mid High Crossover Freq"},
-         
+        
         {Threshold_Low_Band,  "Threshold Low Band"},
         {Threshold_Mid_Band,  "Threshold Mid Band"},
         {Threshold_High_Band, "Threshold High Band"},
@@ -87,6 +90,8 @@ inline const map<Names, juce::String>& GetParams(){
         {Solo_Low_Band,  "Solo Low Band"},
         {Solo_Mid_Band,  "Solo Mid Band"},
         {Solo_High_Band, "Solo High Band"},
+        {Gain_In,"Gain In"},
+        {Gain_Out,"Gain Out"},
     };
     return params;
 }
@@ -188,8 +193,22 @@ private:
     
     juce::AudioParameterFloat* lowMidCrossover { nullptr };
     juce::AudioParameterFloat* midHighCrossover { nullptr };
+    
     array<juce::AudioBuffer<float>, 3> filterBuffers;
     
+    juce::dsp::Gain<float> inputGain, outputGain;
+    juce::AudioParameterFloat* inputGainParam { nullptr };
+    juce::AudioParameterFloat* outputGainParam { nullptr };
+    
+    template<typename T, typename U>
+    void applyGain(T& buffer, U& gain){
+        auto block = juce::dsp::AudioBlock<float>(buffer);
+        auto ctx = juce::dsp::ProcessContextReplacing<float>(block);
+        gain.process(ctx);
+    }
+    void updateState();
+    
+    void splitBands(const juce::AudioBuffer<float>& inputBuffer);
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (SimpleMBCompAudioProcessor);
 };
