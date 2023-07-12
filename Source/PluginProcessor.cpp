@@ -307,7 +307,6 @@ void SimpleMBCompAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer,
         }
     }
     
-    
     //    addFilterBand(buffer, filterBuffers[0]);
     //    addFilterBand(buffer, filterBuffers[1]);
     //    addFilterBand(buffer, filterBuffers[2]);
@@ -347,8 +346,8 @@ bool SimpleMBCompAudioProcessor::hasEditor()    const
 
 juce::AudioProcessorEditor* SimpleMBCompAudioProcessor::createEditor()
 {
- //   return new SimpleMBCompAudioProcessorEditor (*this);
-    return new juce::GenericAudioProcessorEditor(*this);
+      return new SimpleMBCompAudioProcessorEditor (*this);
+//    return new juce::GenericAudioProcessorEditor(*this);
 }
 
 //==============================================================================
