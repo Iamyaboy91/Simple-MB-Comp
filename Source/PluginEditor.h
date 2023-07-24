@@ -10,6 +10,7 @@
 
 #include <JuceHeader.h>
 #include "PluginProcessor.h"
+using namespace std;
 
 struct LookAndFeel : juce::LookAndFeel_V4
 {
@@ -104,15 +105,60 @@ struct RotarySlider: juce::Slider{
     {}
 };
 
+
+template<
+typename Attachment,
+typename APVTS,
+typename Params,
+typename ParamName,
+typename SliderType
+>
+
+void makeAttachment(unique_ptr<Attachment>& attachment, APVTS& apvts, const Params& params, const ParamName& name, SliderType& slider)
+{
+    attachment = make_unique<Attachment>(apvts,
+                                         params.at(name),
+                                         slider);
+}
+template<
+typename APVTS,
+typename Params,
+typename Name
+>
+juce::RangedAudioParameter& getParam(APVTS& apvts, const Params& params, const Name& name){
+    auto param = apvts.getParameter(params.at(name));
+    jassert(param != nullptr);
+    return *param;
+}
+juce::String getValString(const juce::RangedAudioParameter& param,
+                          bool getLow, juce::String suffix);
+
+template<
+typename Labels,
+typename ParamType,
+typename SuffixType
+>
+void addLabelPairs(Labels& labels, const ParamType& param, const SuffixType& suffix){
+    labels.clear();
+    labels.add({0.f, getValString(param, true, suffix)});
+    labels.add({1.f, getValString(param, false, suffix)});
+}
+
 struct GlobalControls : juce::Component
 {
-    GlobalControls();
+    GlobalControls(juce::AudioProcessorValueTreeState& apvts);
     
     void paint(juce::Graphics& g) override;
     
     void resized() override;
 private:
-    RotarySlider inGainSlider, lowMidXoverSlider, midHighXoverSlider, outGainSlider;
+    using RSWL = RotarySliderWithLabels;
+    unique_ptr<RSWL> inGainSlider, lowMidXoverSlider, midHighXoverSlider, outGainSlider;
+    using Attachment = juce::AudioProcessorValueTreeState::SliderAttachment;
+    unique_ptr<Attachment> lowMidXoverSliderAttachment,
+                           midHighXoverSliderAttachment,
+                           inGainSlidetrAttachment,
+                           outGainSliderAttachment;
 };
 /**
 */
@@ -131,7 +177,7 @@ private:
     // access the processor object that created it.
     SimpleMBCompAudioProcessor& audioProcessor;
     Placeholder controlBar, analyzer, /*globalControls, */ bandControls;
-    GlobalControls globalControls;
+    GlobalControls globalControls { audioProcessor.apvts};
     
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (SimpleMBCompAudioProcessorEditor)
