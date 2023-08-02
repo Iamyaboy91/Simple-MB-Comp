@@ -313,56 +313,15 @@ CompressorBandControls::CompressorBandControls(juce::AudioProcessorValueTreeStat
     thresholdSlider(nullptr, "dB", "THRS"),
     ratioSlider(nullptr, "")
 {
-//    using namespace Params;
-//    const auto& params = GetParams();
-    
-//    auto getParamHelper = [&params, &apvts = this->apvts](const auto& name)-> auto&
-//    {
-//        return getParam(apvts, params, name);
-//    };
-    
-//    attackSlider.changeParam(&getParamHelper(Names::Attack_Mid_Band));
-//    releaseSlider.changeParam(&getParamHelper(Names::Release_Mid_Band));
-//    thresholdSlider.changeParam(&getParamHelper(Names::Threshold_Mid_Band));
-//    ratioSlider.changeParam(&getParamHelper(Names::Ratio_Mid_Band));
-//
-//    addLabelPairs(attackSlider.labels, getParamHelper(Names::Attack_Mid_Band), "ms");
-//    addLabelPairs(releaseSlider.labels, getParamHelper(Names::Release_Mid_Band), "ms");
-//    addLabelPairs(thresholdSlider.labels, getParamHelper(Names::Threshold_Mid_Band), "dB");
-//
-//    ratioSlider.labels.clear();
-//    ratioSlider.labels.add({0.f, "1:1"});
-//    auto ratioParam = dynamic_cast<juce::AudioParameterChoice*>(&getParamHelper(Names::Ratio_Mid_Band));
-//    ratioSlider.labels.add({1.0f,
-//        juce::String (ratioParam-> choices.getReference(ratioParam -> choices.size() -1 ).getIntValue()) + ":1"});
-    
-//    auto makeAttachmentHelper = [&params, &apvts = this->apvts ](auto& attachment,
-//                                             const auto& name,
-//                                             auto& slider)
-//    {
-//        makeAttachment(attachment, apvts, params, name, slider);
-//    };
-    
-//    makeAttachmentHelper(attackSliderAttachment,
-//                         Names::Attack_Mid_Band,
-//                         attackSlider);
-//
-//    makeAttachmentHelper(releaseSliderAttachment,
-//                         Names::Release_Mid_Band,
-//                         releaseSlider);
-//
-//    makeAttachmentHelper(thresholdSliderAttachment,
-//                         Names::Threshold_Mid_Band,
-//                         thresholdSlider);
-//
-//    makeAttachmentHelper(ratioSliderAttachment,
-//                         Names::Ratio_Mid_Band,
-//                         ratioSlider);
-    
+
     addAndMakeVisible(attackSlider);
     addAndMakeVisible(releaseSlider);
     addAndMakeVisible(thresholdSlider);
     addAndMakeVisible(ratioSlider);
+    
+    bypassButton.addListener(this);
+    soloButton.addListener(this);
+    muteButton.addListener(this);
     
     bypassButton.setName("X");
     soloButton.setName("S");
@@ -371,10 +330,6 @@ CompressorBandControls::CompressorBandControls(juce::AudioProcessorValueTreeStat
     addAndMakeVisible(bypassButton);
     addAndMakeVisible(soloButton);
     addAndMakeVisible(muteButton);
-    
-//    makeAttachmentHelper(bypassButtonAttachment, Names::Bypassed_Mid_Band, bypassButton);
-//    makeAttachmentHelper(soloButtonAttachment, Names::Solo_Mid_Band, soloButton);
-//    makeAttachmentHelper(muteButtonAttachment, Names::Mute_Mid_Band, muteButton);
     
     lowBand.setName("Low");
     midBand.setName("Mid");
@@ -399,11 +354,17 @@ CompressorBandControls::CompressorBandControls(juce::AudioProcessorValueTreeStat
     
     updateAttachments();
     
-    
     addAndMakeVisible(lowBand);
     addAndMakeVisible(midBand);
     addAndMakeVisible(highBand);
 }
+CompressorBandControls::~CompressorBandControls()
+{
+    bypassButton.removeListener(this);
+    soloButton.removeListener(this);
+    muteButton.removeListener(this);
+}
+
 void CompressorBandControls::resized(){
     auto bounds = getLocalBounds().reduced(5);
     using namespace juce;
@@ -479,6 +440,42 @@ void drawModuleBackground(juce::Graphics &g,
 void CompressorBandControls::paint(juce::Graphics &g){
     auto bounds = getLocalBounds();
     drawModuleBackground(g, bounds);
+}
+
+void CompressorBandControls::buttonClicked(juce::Button *button)
+{
+    updateSliderEnablements();
+    updateSoloMuteBypassToggleState(*button);
+    
+}
+
+void CompressorBandControls::updateSliderEnablements()
+{
+    auto disabled = muteButton.getToggleState() || bypassButton.getToggleState();
+    attackSlider.setEnabled( !disabled );
+    releaseSlider.setEnabled( !disabled );
+    thresholdSlider.setEnabled( !disabled );
+    ratioSlider.setEnabled( !disabled );
+
+}
+
+void CompressorBandControls::updateSoloMuteBypassToggleState(juce::Button &clickedButton)
+{
+    if( &clickedButton == &soloButton && soloButton.getToggleState())
+    {
+        bypassButton.setToggleState(false, juce::NotificationType::sendNotification);
+        muteButton.setToggleState(false, juce::NotificationType::sendNotification);
+    }
+    else if(&clickedButton == &muteButton && muteButton.getToggleState() )
+    {
+        bypassButton.setToggleState(false, juce::NotificationType::sendNotification);
+        soloButton.setToggleState(false, juce::NotificationType::sendNotification);
+    }
+    else if(&clickedButton == &bypassButton && bypassButton.getToggleState())
+    {
+        muteButton.setToggleState(false, juce::NotificationType::sendNotification);
+        soloButton.setToggleState(false, juce::NotificationType::sendNotification);
+    }
 }
 
 void CompressorBandControls::updateAttachments()
