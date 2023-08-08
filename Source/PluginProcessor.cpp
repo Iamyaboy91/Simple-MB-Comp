@@ -8,6 +8,8 @@
 
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
+#include "Params.h"
+
 using namespace std;
 //==============================================================================
 SimpleMBCompAudioProcessor::SimpleMBCompAudioProcessor()
