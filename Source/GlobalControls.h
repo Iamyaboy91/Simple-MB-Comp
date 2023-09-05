@@ -12,7 +12,6 @@
 #include<JuceHeader.h>
 #include "RotarySliderWithLabels.h"
 
-using namespace std;
 
 struct GlobalControls : juce::Component
 {

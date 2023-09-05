@@ -76,13 +76,15 @@ GlobalControls::GlobalControls(juce::AudioProcessorValueTreeState& apvts){
     addAndMakeVisible(*outGainSlider);
 }
 
-void GlobalControls::paint(juce::Graphics &g){
+void GlobalControls::paint(juce::Graphics &g)
+{
     auto bounds = getLocalBounds();
 
     drawModuleBackground(g, bounds);
     
 }
-void GlobalControls::resized(){
+void GlobalControls::resized()
+{
     auto bounds = getLocalBounds().reduced(5);
     using namespace juce;
     FlexBox flexBox;

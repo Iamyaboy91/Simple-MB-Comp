@@ -19,6 +19,7 @@ juce::String getValString(const juce::RangedAudioParameter& param,
                         param.getNormalisableRange().end;
     
     bool useK = truncateKiloValue(val);
+    str << val;
     
     if ( useK )
         str << "K";
