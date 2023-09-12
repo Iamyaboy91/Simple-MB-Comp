@@ -38,7 +38,9 @@ struct AnalyzerPathGenerator
         auto map = [bottom, top, negativeInfinity](float v)
         {
             return juce::jmap(v,
-                              negativeInfinity, 0.f,
+//                              negativeInfinity, 0.f,
+//
+                              negativeInfinity, MAX_DECIBELS,
 //                              float(bottom+10),   top);
                               bottom, top);
         };
@@ -55,7 +57,7 @@ struct AnalyzerPathGenerator
 
         for( int binNum = 1; binNum < numBins; binNum += pathResolution )
         {
-            y = map(renderData[binNum]);
+            y = map(renderData[static_cast<size_t>(binNum)]);
 
 //            jassert( !std::isnan(y) && !std::isinf(y) );
 

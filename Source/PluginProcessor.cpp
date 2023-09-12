@@ -288,7 +288,7 @@ void SimpleMBCompAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer,
     
     updateState();
     
-    if(/* DISABLES CODE */ (false))
+    if(false)
     {
         buffer.clear();
         auto block = juce::dsp::AudioBlock<float>(buffer);
@@ -406,7 +406,7 @@ juce::AudioProcessorValueTreeState::ParameterLayout SimpleMBCompAudioProcessor::
     layout.add(make_unique<AudioParameterFloat>(params.at(Names::Gain_Out),
                                                 params.at(Names::Gain_Out), gainRange,0));
     
-    auto thresholdRange = NormalisableRange<float>(-60, 12, 1, 1);
+    auto thresholdRange = NormalisableRange<float>(MIN_THRESHOLD, MAX_DECIBELS, 1, 1);
     layout.add(make_unique<AudioParameterFloat>(params.at(Names::Threshold_Low_Band),
                                                 params.at(Names::Threshold_Low_Band), thresholdRange,0));
     layout.add(make_unique<AudioParameterFloat>(params.at(Names::Threshold_Mid_Band),
