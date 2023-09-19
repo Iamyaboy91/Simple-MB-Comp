@@ -470,9 +470,9 @@ juce::AudioProcessorValueTreeState::ParameterLayout SimpleMBCompAudioProcessor::
                                                params.at(Names::Solo_High_Band), false));
     
     layout.add(make_unique<AudioParameterFloat>(params.at(Names::Low_Mid_Crossover_Freq), params.at(Names::Low_Mid_Crossover_Freq),
-                                                NormalisableRange<float>(20, 999, 1, 1), 500));
+                                                NormalisableRange<float>(MIN_FREQUENCY, 999, 1, 1), 500));
     layout.add(make_unique<AudioParameterFloat>(params.at(Names::Mid_High_Crossover_Freq), params.at(Names::Mid_High_Crossover_Freq),
-                                                NormalisableRange<float>(1000, 20000, 1, 1), 2000));
+                                                NormalisableRange<float>(1000, MAX_FREQUENCY, 1, 1), 2000));
     
     return layout;
 };
