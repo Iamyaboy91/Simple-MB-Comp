@@ -29,7 +29,7 @@ rightPathProducer(audioProcessor.rightChannelFifo)
         param->addListener(this);
     }
     using namespace Params;
-    const auto paramNames = GetParams();
+    const auto& paramNames = GetParams();
     
     auto floatHelper = [&apvts = audioProcessor.apvts, &paramNames](auto& param, const auto& paramName){
         param = dynamic_cast<juce::AudioParameterFloat*>(apvts.getParameter(paramNames.at(paramName)));
@@ -39,7 +39,12 @@ rightPathProducer(audioProcessor.rightChannelFifo)
     floatHelper(lowMidXoverParam, Names::Low_Mid_Crossover_Freq);
     floatHelper(midHighXoverParam, Names::Mid_High_Crossover_Freq);
     
+    floatHelper(lowThresholdParam, Names::Threshold_Low_Band);
+    floatHelper(midThresholdParam, Names::Threshold_Mid_Band);
+    floatHelper(highThresholdParam, Names::Threshold_High_Band);
+    
     startTimerHz(60);
+
 }
 
 SpectrumAnalyzer::~SpectrumAnalyzer()
@@ -115,6 +120,9 @@ void SpectrumAnalyzer::drawCrossovers(juce::Graphics &g, juce::Rectangle<int> bo
     
     const auto top = bounds.getY();
     const auto bottom = bounds.getBottom();
+    const auto left = bounds.getX();
+    const auto right = bounds.getRight();
+    
     
     auto mapX = [left = bounds.getX(),
                  width = bounds.getWidth()]
@@ -132,6 +140,22 @@ void SpectrumAnalyzer::drawCrossovers(juce::Graphics &g, juce::Rectangle<int> bo
     auto midHighX = mapX(midHighXoverParam->get());
     g.setColour(Colours::orange);
     g.drawVerticalLine(midHighX, top, bottom);
+    
+    auto mapY = [bottom, top](float db)
+    {
+        return jmap(db, NEGATIVE_INFINITY, MAX_DECIBELS,
+                      (float)bottom, (float)top);
+    };
+    g.setColour(Colours::yellow);
+    g.drawHorizontalLine(mapY(lowThresholdParam->get()),
+                         left,
+                         lowMidX);
+    g.drawHorizontalLine(mapY(midThresholdParam->get()),
+                         lowMidX,
+                         midHighX);
+    g.drawHorizontalLine(mapY(highThresholdParam->get()),
+                         midHighX,
+                         right);
 }
 
 vector<float> SpectrumAnalyzer::getFrequencies()
@@ -198,7 +222,8 @@ void SpectrumAnalyzer::drawBackgroundGrid(juce::Graphics &g, juce::Rectangle<int
     for( auto gDb : gain )
     {
 //        auto y = jmap(gDb, -24.f, 24.f, float(bottom), float(top));
-        auto y = jmap(gDb, NEGATIVE_INFINITY, MAX_DECIBELS, (float)bottom, (float)top);
+        auto y = jmap(gDb, NEGATIVE_INFINITY, MAX_DECIBELS, 
+                      (float)bottom, (float)top);
         
         g.setColour(gDb == 0.f ? Colour(0u, 172u, 1u) : Colours::darkgrey );
         g.drawHorizontalLine(y, left, right);
