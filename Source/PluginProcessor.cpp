@@ -51,7 +51,8 @@ SimpleMBCompAudioProcessor::SimpleMBCompAudioProcessor()
     choiceHelper(midBandComp.ratio,  Names::Ratio_Mid_Band);
     choiceHelper(highBandComp.ratio, Names::Ratio_High_Band);
      
-    auto boolHelper = [&apvts = this->apvts, &params](auto& param, const auto& paramName){
+    auto boolHelper = [&apvts = this->apvts, &params](auto& param, const auto& paramName)
+    {
         param = dynamic_cast<juce::AudioParameterBool*>(apvts.getParameter(params.at(paramName)));
         jassert(param != nullptr);
     };

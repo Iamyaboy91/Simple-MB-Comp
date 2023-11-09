@@ -332,6 +332,7 @@ void SpectrumAnalyzer::drawTextLabels(juce::Graphics &g, juce::Rectangle<int> bo
 //        r.setX(getWidth() - textWidth);
         r.setX(bounds.getRight() - textWidth);
         r.setCentre(r.getCentreX(), y);
+        r.setCentre(r.getCentreX(), y);
         
         g.setColour(gDb == 0.f ? Colour(0u, 172u, 1u) : Colours::lightgrey );
         
