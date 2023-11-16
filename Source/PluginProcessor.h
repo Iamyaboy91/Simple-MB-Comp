@@ -33,8 +33,9 @@
  10) Implementatio of the analyzer rendering pre-computed paths DONE
  11) Drawing crossovers on top of the analyzer plot DONE
  12) Drawing gain reduction on top of the analyzer DONE
- 13) Analyzer bypass
- 14) Global Bypass button
+ 13) Analyzer bypass DONE
+ 14) Global Bypass button DONE
+ 
  */
 #include <JuceHeader.h>
 #include "CompressorBand.h"

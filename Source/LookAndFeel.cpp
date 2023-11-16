@@ -13,7 +13,7 @@
 #include "Custom Buttons.h"
 
 
-void LookAndFeel::drawRotarySlider(juce::Graphics & g,
+void LookAndFeel::drawRotarySlider(juce::Graphics &g,
                                    int x,
                                    int y,
                                    int width,
@@ -21,7 +21,7 @@ void LookAndFeel::drawRotarySlider(juce::Graphics & g,
                                    float sliderPosProportional,
                                    float rotaryStartAngle,
                                    float rotaryEndAngle,
-                                   juce::Slider & slider)
+                                   juce::Slider &slider)
 {
     using namespace juce;
     
@@ -29,10 +29,13 @@ void LookAndFeel::drawRotarySlider(juce::Graphics & g,
     
     auto enabled = slider.isEnabled();
     
-    g.setColour(enabled ? Colour(97u, 18u, 167u) : Colours::darkgrey );
+//    g.setColour(enabled ? Colour(97u, 18u, 167u) : Colours::darkgrey );
+    g.setColour(enabled ? ColorScheme::getModuleColor() : Colours::darkgrey);
+    
     g.fillEllipse(bounds);
     
-    g.setColour(enabled ? Colour(255u, 154u, 1u) : Colours::grey);
+//    g.setColour(enabled ? Colour(255u, 154u, 1u) : Colours::grey);
+    g.setColour(enabled ? ColorScheme::getSliderBorderColor() :  Colours::grey);
     g.drawEllipse(bounds, 1.f);
     
     if( auto* rswl = dynamic_cast<RotarySliderWithLabels*>(&slider))
@@ -133,6 +136,7 @@ void LookAndFeel::drawToggleButton(juce::Graphics &g,
         g.setColour(buttonIsOn ?
                     toggleButton.findColour(TextButton::ColourIds::buttonOnColourId) :
                     toggleButton.findColour(TextButton::ColourIds::buttonColourId));
+        
         
         g.fillRoundedRectangle(bounds.toFloat(), cornerSize);
         

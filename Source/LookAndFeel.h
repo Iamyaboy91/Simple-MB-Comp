@@ -11,7 +11,35 @@
 #pragma once
 
 #include<JuceHeader.h>
-#include "PluginProcessor.h"
+
+#define USE_LIVE_CONSTANT true
+
+#if USE_LIVE_CONSTANT
+#define colorHelper(c) JUCE_LIVE_CONSTANT(c);
+#else
+#define colorHelper(c);
+#endif
+
+
+namespace ColorScheme 
+{
+inline juce::Colour getSliderBorderColor()
+{
+    return colorHelper(juce::Colour(0xff2f5219) );
+}
+inline juce::Colour getModuleColor()
+{
+    return colorHelper(juce::Colour(0xff272f04));
+}
+inline juce::Colour getTextHighLight()
+{
+    return colorHelper(juce::Colours::black);
+}
+inline juce::Colour getTextColor()
+{
+    return colorHelper(juce::Colours::darkgrey);
+}
+}
 
 struct LookAndFeel : juce::LookAndFeel_V4
 {
