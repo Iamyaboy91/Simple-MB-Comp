@@ -49,7 +49,7 @@ void RotarySliderWithLabels::paint(juce::Graphics &g)
     
     auto center = sliderBounds.toFloat().getCentre();
     auto radius = sliderBounds.getWidth() * 0.5f;
-    auto enabled = g.juce::isEnabled();
+    auto enabled = Slider().isEnabled();
     
     g.setColour(enabled ? ColorScheme::getTextColor() : Colours::grey);
     g.setFont(getTextHeight());

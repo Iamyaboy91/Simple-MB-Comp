@@ -39,6 +39,10 @@ inline juce::Colour getTextColor()
 {
     return colorHelper(juce::Colours::darkgrey);
 }
+inline juce::Colour getBackGround()
+{
+    return colorHelper(juce::Colours::black);
+}
 }
 
 struct LookAndFeel : juce::LookAndFeel_V4
