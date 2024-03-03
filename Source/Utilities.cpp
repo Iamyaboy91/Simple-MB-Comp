@@ -35,11 +35,11 @@ juce::Rectangle<int> drawModuleBackground(juce::Graphics &g,
                           juce::Rectangle<int> bounds)
 {
     using namespace juce;
-    g.setColour(ColorScheme::getModuleColor());
+    g.setColour(Colours::lightslategrey);
     g.fillAll();
     auto localBounds = bounds;
     bounds.reduce(3,3);
-    g.setColour(ColorScheme::getBackGround());
+    g.setColour(Colours::lightgrey);
     g.fillRoundedRectangle(bounds.toFloat(), 3);
     
     g.drawRect(localBounds);

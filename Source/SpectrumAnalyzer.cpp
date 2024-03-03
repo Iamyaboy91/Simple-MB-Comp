@@ -148,7 +148,7 @@ void SpectrumAnalyzer::drawCrossovers(juce::Graphics &g, juce::Rectangle<int> bo
     };
     
     auto zeroDb = mapY(0.f);
-    g.setColour(Colours::hotpink.withAlpha(0.3f));
+    g.setColour(Colours::lime.withAlpha(0.3f));
     
     g.fillRect(Rectangle<float>::leftTopRightBottom(left,
                                                     zeroDb,
@@ -163,7 +163,7 @@ void SpectrumAnalyzer::drawCrossovers(juce::Graphics &g, juce::Rectangle<int> bo
                                                     right,
                                                     mapY(highBandGR)));
     
-    g.setColour(Colours::yellow);
+    g.setColour(Colours::lime);
     g.drawHorizontalLine(mapY(lowThresholdParam->get()),
                          left,
                          lowMidX);
