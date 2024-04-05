@@ -48,6 +48,7 @@ enum Names{
     Gain_In,
     Gain_Out,
 };
+
 inline const map<Names, juce::String>& GetParams(){
     static map<Names, juce::String> params = {
         {Low_Mid_Crossover_Freq,"Low Mid Crossover Freq"},

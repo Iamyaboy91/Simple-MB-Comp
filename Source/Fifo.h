@@ -26,7 +26,7 @@ struct Fifo
                            numSamples,
                            false,   //clear everything?
                            true,    //including the extra space?
-                           true);   //avoid reallocating if you can?
+                           true);   //avoid rellocating if you can?
             buffer.clear();
         }
     }
